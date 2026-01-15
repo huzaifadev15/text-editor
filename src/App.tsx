@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Plus, Trash2, Copy, Check } from "lucide-react";
 
 export default function App() {
@@ -24,7 +24,7 @@ export default function App() {
     }
   };
 
-  const updateFAQ = (index: number, field: string, value: string) => {
+  const updateFAQ = (index: number, field: keyof typeof faqs[0], value: string) => {
     const newFaqs = [...faqs];
     newFaqs[index][field] = value;
     setFaqs(newFaqs);
@@ -111,7 +111,7 @@ export default function App() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              rows="6"
+              rows={6}
               placeholder="Enter your description here...&#10;&#10;Use **text** for bold&#10;Use [link text](url) for links&#10;&#10;Example: Visit our **premium collection** at [our store](https://example.com) for more."
             />
           </div>
@@ -199,7 +199,7 @@ export default function App() {
                     value={faq.answer}
                     onChange={(e) => updateFAQ(index, "answer", e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                    rows="4"
+                    rows={4}
                     placeholder="Enter the answer..."
                   />
                 </div>
