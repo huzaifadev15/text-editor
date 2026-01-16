@@ -42,31 +42,37 @@ export default function App() {
   const generateHTML = () => {
     const processedDesc = processDescription(description);
 
-    let html = `<p class="mb-[27px]" style="font-size : 18px;">`;
+    let html = `<!-- Description Section -->
+<div>\n`;
+    html += `<p class="mb-[27px]" style="font-size : 18px;">`;
 
     if (boldTextStart) {
       html += `<strong class="text-xl md:text-2xl font-bold text-gray-900">${boldTextStart}</strong> `;
     }
 
     html += `${processedDesc}</p>\n`;
+    html += `</div>\n\n`;
 
+    html += `<!-- FAQ Section -->\n`;
+    html += `<div>\n`;
     html += `<!-- FAQ heading wrapper -->\n`;
     html += `<div style="margin-bottom: 27px; margin-top: 27px;" class="my-[27px]">\n`;
     html += `<p style="font-size: 42px;" class="text-2xl md:text-3xl font-bold text-gray-900">Frequently Asked Questions</p>\n`;
     html += `</div>\n`;
 
     // Grid container
-    html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-6">\n`;
+    html += `<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;">\n`;
 
     faqs.forEach((faq) => {
       if (faq.question && faq.answer) {
-        html += `  <div class="bg-gray-50 p-6 rounded-lg">\n`;
-        html += `    <h5 class="text-lg md:text-xl font-semibold text-gray-900 mb-3" style="font-size: 18px; font-weight: 800;">${faq.question}</h5>\n`;
-        html += `    <p class="text-base md:text-lg leading-snug text-gray-700" style="font-size: 18px">${faq.answer}</p>\n`;
+        html += `  <div style="background-color: #f9fafb; padding: 24px; border-radius: 8px;">\n`;
+        html += `    <h5 style="font-size: 18px; font-weight: 800; color: #111827; margin-bottom: 12px;">${faq.question}</h5>\n`;
+        html += `    <p style="font-size: 18px; color: #374151; line-height: 1.6;">${faq.answer}</p>\n`;
         html += `  </div>\n`;
       }
     });
 
+    html += `</div>\n`;
     html += `</div>`;
 
     setGeneratedHTML(html);
@@ -146,7 +152,7 @@ export default function App() {
         <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-2xl font-semibold text-gray-800">
-              FAQs (Grid Layout)
+              FAQs (Separate Wrappers)
             </h2>
             <button
               onClick={addFAQ}
